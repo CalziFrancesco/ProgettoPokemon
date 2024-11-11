@@ -29,9 +29,13 @@ async function fetchPokemonImage(pokemonId) {
         const imageUrl = data.sprites.front_default;
         const img = document.createElement('img');
         img.src = imageUrl;
+        const imgPokeball = document.createElement('img');
+        imgPokeball.src = "Pokeball.jpeg";
         //img.alt = `ID: ${pokemonId}`;
-        document.getElementById('pokemon-image').innerHTML = '';
+        // document.getElementById('pokemon-image').innerHTML = '';
         document.getElementById('pokemon-image').appendChild(img);
+        document.getElementById('pokeball').appendChild(imgPokeball);
+
     } catch (error) {
         console.error('Errore nella fetch:', error);
     }
@@ -50,6 +54,7 @@ function startLoop() {
         await fetchPokemonImage(randomPokemonId);
         setTimeout(() => {
             document.getElementById('pokemon-image').innerHTML = '';
+            document.getElementById('pokeball').innerHTML = '';
             setTimeout(loop, timeNotAlive());
         }, timeAlive());
     }
@@ -59,5 +64,5 @@ function startLoop() {
 
 startLoop();
 
-const randomPokemonId = getRandomPokemonId();
-fetchPokemonImage(randomPokemonId);
+// const randomPokemonId = getRandomPokemonId();
+// fetchPokemonImage(randomPokemonId);
