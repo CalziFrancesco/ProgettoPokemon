@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Document</title>
 </head>
 <body>
@@ -14,8 +16,10 @@
         <div id="pokemon-image"></div>
         <!-- <img id="pokeball" src="Pokeball.jpeg" alt="Pokéball"> -->
         <p id="nome-pokemon"></p>
-        <button id = "pokeball" alt="Pokéball" style="border: none; outline: none; background-color: transparent;"></button>
+        <button id = "pokeball" alt="Pokéball" style="border: none; outline: none; background-color: transparent;" onclick="catchPokemon()"></button>
+        
     </div>
+    <img src="Pokeball.jpeg" class="pokeball" onclick="window.location.href='index1.html';"></button>
 
     <script src="script.js"></script>
 </body>

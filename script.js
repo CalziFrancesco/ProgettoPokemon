@@ -1,5 +1,5 @@
 //da 1 a 1025, da 10001 a 10277
-
+const pokemonInfo=[]; 
 function getRandomPokemonId() {
     const range = Math.random();
     if (range < 0.8) {
@@ -26,11 +26,13 @@ async function fetchPokemonImage(pokemonId) {
             throw new Error('Qualcosa non va');
         }
         const data = await response.json();
+        pokemonInfo.pop();
+        pokemonInfo.push(data);
         const imageUrl = data.sprites.front_default;
         const img = document.createElement('img');
         img.src = imageUrl;
         const nomePokemon = document.createElement('p');
-        nomePokemon.textContent = data.forms[0].name;
+        nomePokemon.textContent = data.name;
         const imgPokeball = document.createElement('img');
         imgPokeball.src = "PokeballSenzaSfondo.png";
         //img.alt = `ID: ${pokemonId}`;
@@ -43,6 +45,7 @@ async function fetchPokemonImage(pokemonId) {
         console.error('Errore nella fetch:', error);
     }
 }
+
 
 // function startLoop() {
 //     setInterval(() => {
@@ -61,12 +64,42 @@ function startLoop() {
             document.getElementById('pokeball').innerHTML = '';
             setTimeout(loop, timeNotAlive());
         }, timeAlive());
+        
     }
 
     loop();
 }
-
 startLoop();
+
+/* ------------------------------------pokedex------------------------------------------------------- */
+let pokedex=[];
+function loadPokedex(){
+    pokedex = JSON.parse(localStorage.getItem("savedPokemon")) || []; 
+}
+
+function catchPokemon(){
+    console.log(pokemonInfo[0].name);
+    
+    localStorage.setItem("savedPokemon",JSON.stringify(pokemonInfo))
+    /* const imageUrl = pokemonInfo[0].sprites.front_default;
+    const img = document.createElement('img');
+    img.src = imageUrl; */
+    const nomePokemon = document.createElement('p');
+    nomePokemon.textContent = pokemonInfo[0].name;
+    console.log(nomePokemon.textContent)
+    /* document.getElementById('pokedex-pokemon-image').appendChild(img); */
+    document.getElementById('pokedex-nome-pokemon').appendChild(nomePokemon);
+    /* console.log(pokemonInfo); */
+    /* console.log(pokemonInfo[0].name); */
+    pokedex.push(pokemonInfo);
+}
+function salvaNomi(){
+    localStorage.setItem("nomiSalvati", JSON.stringify(nomi));
+    alert("Nomi salvati con successo");
+}
+
+
 
 // const randomPokemonId = getRandomPokemonId();
 // fetchPokemonImage(randomPokemonId);
+
