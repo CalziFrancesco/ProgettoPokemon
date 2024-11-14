@@ -8,14 +8,20 @@
 </head>
 <body>
 
-    
-
     <div class="container">
-        <div id="pokemon-image"></div>
-        <!-- <img id="pokeball" src="Pokeball.jpeg" alt="Pokéball"> -->
-        <p id="nome-pokemon"></p>
-        <button id = "pokeball" alt="Pokéball" style="border: none; outline: none; background-color: transparent;"></button>
+        <div class="card">
+            <div class="wrapper">
+                <div id="pokemon-image"></div>
+                <img id="hover-image" class="hover-image" src="">
+            </div>
+            <p id="nome-pokemon"></p>
+        </div>
+        <button id="pokeball" style="border: none; outline: none; background-color: transparent;" onclick="catchPokemon()"></button>
+        <!-- <img src="Pokeball.jpeg" id="pokeball2" class="pokeball" onclick="window.location.href='index1.html';"></button> -->
     </div>
+
+    <div id="pokedex-pokemon-image"></div>
+    <p id="pokedex-nome-pokemon"></p>
 
     <script src="script.js"></script>
 </body>
