@@ -208,3 +208,14 @@ body {
     width: 150px;
     height: auto;
 }
+
+#home {
+    /* position: absolute; */
+    bottom: -60px; /* Spostiamo la Pokéball sotto la card */
+    left: 50%;
+    transform: translateX(-50%); /* Centra la Pokéball orizzontalmente */
+    z-index: 1; /* Mantieni la Pokéball sotto la card */
+    display: block;  /* Assicuriamoci che venga mostrata correttamente */
+    height: 50px;
+    font-weight: 50px;
+}
