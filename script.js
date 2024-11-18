@@ -1,42 +1,63 @@
 //da 1 a 1025, da 10001 a 10277
-
+const pokemonInfo=[]; 
 function getRandomPokemonId() {
-    const range = Math.random();
-    if (range < 0.8) {
-        return Math.floor(Math.random() * 1025) + 1;
-    } else {
-        return Math.floor(Math.random() * (10277 - 10001 + 1)) + 10001;
-    }
+    return Math.floor(Math.random() * 1302) + 1;
 }
 
 function timeAlive () {
-    return Math.floor(Math.random() * (2000 - 1000 + 1)) + 1000;
+    return Math.floor(Math.random() * (8000 - 7000 + 1)) + 7000;
 }
 
 function timeNotAlive() {
     return Math.floor(Math.random() * (2000 - 1000 + 1)) + 1000;
 }
 
+async function esiste(url) {
+    try {
+        const response = await fetch(url, { method: 'HEAD' });
+        return response.ok;
+    } catch (error) {
+        return false;
+    }
+}
+
 async function fetchPokemonImage(pokemonId) {
-    const url = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
+    const url = `https://pokeapi.co/api/v2/pokemon?limit=1&offset=${pokemonId}`;
     
     try {
         const response = await fetch(url);
         if (!response.ok) {
             throw new Error('Qualcosa non va');
         }
-        const data = await response.json();
-        const imageUrl = data.sprites.front_default;
-        const img = document.createElement('img');
-        img.src = imageUrl;
-        const nomePokemon = document.createElement('p');
-        nomePokemon.textContent = data.forms[0].name;
+        const pokemonResult = await response.json();
+        const pokemonInfoUrl = pokemonResult.results[0].url;
+        const pokemonInfoResponse = await fetch(pokemonInfoUrl);
+        const data = await pokemonInfoResponse.json();
+        pokemonInfo.pop();
+        pokemonInfo.push(data);
         const imgPokeball = document.createElement('img');
-        imgPokeball.src = "PokeballSenzaSfondo.png";
-        //img.alt = `ID: ${pokemonId}`;
-        // document.getElementById('pokemon-image').innerHTML = '';
+        imgPokeball.src = "pokeball.png";
+        const pokemonName = data.forms[0].name;
+        const urlOver = `https://raw.githubusercontent.com/tdmalone/pokecss-media/master/graphics/pokemon/ani-front-shiny/${pokemonName}.gif`;
+
+        //console.log("URL GIF:", urlOver);
+
+        const frontImageUrl = data.sprites.front_default;
+        const img = document.createElement('img');
+        img.src = frontImageUrl;
+        img.classList.add('cover-image');
+        const hoverImg = document.getElementById('hover-image');
+        // const imgPokeball = document.createElement('img');
+        // imgPokeball.src = "pokeball.png";
+        //hoverImg.src = urlOver; // URL della GIF dinamica
+        if (await esiste(urlOver)) {
+            hoverImg.src = urlOver;
+        } else {
+            hoverImg.src = frontImageUrl;
+        }
+
         document.getElementById('pokemon-image').appendChild(img);
-        document.getElementById('nome-pokemon').appendChild(nomePokemon);
+        document.getElementById('nome-pokemon').textContent = data.forms[0].name;
         document.getElementById('pokeball').appendChild(imgPokeball);
 
     } catch (error) {
@@ -44,29 +65,99 @@ async function fetchPokemonImage(pokemonId) {
     }
 }
 
+
+
 // function startLoop() {
 //     setInterval(() => {
 //         const randomPokemonId = getRandomPokemonId();
 //         fetchPokemonImage(randomPokemonId);
 //     }, 5000);
 // }
-
+let running = true;
 function startLoop() {
-    async function loop() {
-        const randomPokemonId = getRandomPokemonId();
-        await fetchPokemonImage(randomPokemonId);
-        setTimeout(() => {
-            document.getElementById('pokemon-image').innerHTML = '';
-            document.getElementById('nome-pokemon').innerHTML = '';
-            document.getElementById('pokeball').innerHTML = '';
-            setTimeout(loop, timeNotAlive());
-        }, timeAlive());
+    if(running) {
+        loop()
     }
+}
 
+function fermaButton() {
+    running = false;
+    visualizzaPokemon();
+}
+
+function avviaButton() {
+    running = true;
+    document.getElementById('pokedex-pokemon-image').innerHTML = '';
+    document.getElementById('pokedex-nome-pokemon').innerHTML = '';
+    document.getElementById('pokemon-image').innerHTML = '';
+    document.getElementById('hover-image').innerHTML = '';
+    document.getElementById('nome-pokemon').innerHTML = '';
+    document.getElementById('pokeball').innerHTML = '';
+    //document.getElementById('pokeball2').innerHTML = '';
+    //document.getElementById('home').innerHTML = '';
     loop();
 }
 
+async function loop() {
+
+    const randomPokemonId = getRandomPokemonId();
+    await fetchPokemonImage(randomPokemonId);
+    setTimeout(() => {
+        document.getElementById('pokemon-image').innerHTML = '';
+        document.getElementById('nome-pokemon').innerHTML = '';
+        document.getElementById('pokeball').innerHTML = '';
+        document.querySelector('.card').classList.add('hidden');
+        setTimeout(startLoop, timeNotAlive());
+    }, timeAlive());
+}
+
 startLoop();
+
+let pokedex=[];
+function loadPokedex(){
+    pokedex = JSON.parse(localStorage.getItem("savedPokemon")) || [];
+}
+
+function catchPokemon(){
+    const giaCatturato = pokedex.some(pokemon => pokemon.name === pokemonInfo[0].name);
+    
+    if (giaCatturato) {
+        // alert(`${pokemonInfo[0].name} è già stato catturato!`);
+        return;
+    }
+    pokedex.push(pokemonInfo[0]);
+    localStorage.setItem("savedPokemon",JSON.stringify(pokedex));
+    //visualizzaPokemon();
+    // localStorage.clear("savedPokemon");
+}
+// function salvaNomi(){
+//     localStorage.setItem("nomiSalvati", JSON.stringify(nomi));
+//     alert("Nomi salvati con successo");
+// }
+function visualizzaPokemon(){
+    //const pokedex=document.getElementById("pokedex");
+    const pokemonImage=document.getElementById("pokedex-pokemon-image");
+    const pokemonName=document.getElementById("pokedex-nome-pokemon");
+    pokemonImage.innerHTML = '';
+    pokemonName.innerHTML = '';
+    pokedex.forEach(pokedex=> {
+        const imgPokemon=document.createElement("img");
+        imgPokemon.src=pokedex.sprites.front_default;
+        const nomePokemon=document.createElement("p");
+        nomePokemon.textContent=pokedex.forms[0].name;
+        //console.log(imgPokemon);
+        pokemonImage.appendChild(imgPokemon);
+        pokemonImage.appendChild(pokemonName);
+    })
+}
+document.getElementById("pokeball").addEventListener("click",catchPokemon);
+document.addEventListener("DOMContentLoaded",loadPokedex);
+document.addEventListener("DOMContentLoaded", () => {
+    loadPokedex();
+    //visualizzaPokemon();
+});
+
+
 
 // const randomPokemonId = getRandomPokemonId();
 // fetchPokemonImage(randomPokemonId);
