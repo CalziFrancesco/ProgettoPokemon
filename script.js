@@ -83,16 +83,17 @@ function startLoop() {
 function fermaButton() {
     running = false;
     visualizzaPokemon();
+    document.getElementById('pokedex-container').style.display = 'flex';
 }
 
 function avviaButton() {
     running = true;
-    if(!running){
+    if(running){
     document.getElementById('pokedex-pokemon-image').innerHTML = '';
     document.getElementById('pokedex-nome-pokemon').innerHTML = '';
     document.getElementById('pokemon-image').innerHTML = '';
     document.getElementById('hover-image').innerHTML = '';
-    document.getElementById('nome-pokemon').innerHTML = '';
+    // document.getElementById('nome-pokemon').innerHTML = '';
     document.getElementById('pokeball').innerHTML = '';
     //document.getElementById('pokeball2').innerHTML = '';
     //document.getElementById('home').innerHTML = '';
@@ -132,39 +133,71 @@ function catchPokemon(){
     //visualizzaPokemon();
     // localStorage.clear("savedPokemon");
 }
+
+function mostraPokemonInCard(pokemon) {
+    // Pulisci la card principale
+    document.getElementById('pokemon-image').innerHTML = '';
+    document.getElementById('nome-pokemon').innerHTML = '';
+    document.getElementById('pokeball').innerHTML = '';
+
+    // Mostra l'immagine del Pokémon
+    const img = document.createElement('img');
+    img.src = pokemon.sprites.front_default;
+    img.classList.add('cover-image');
+    document.getElementById('pokemon-image').appendChild(img);
+
+    // Mostra il nome del Pokémon
+    document.getElementById('nome-pokemon').textContent = pokemon.forms[0].name;
+
+    // Gestisci la GIF per l'hover effect
+    const hoverImg = document.getElementById('hover-image');
+    const gifUrl = `https://raw.githubusercontent.com/tdmalone/pokecss-media/master/graphics/pokemon/ani-front-shiny/${pokemon.forms[0].name}.gif`;
+
+    esiste(gifUrl).then((exists) => {
+        hoverImg.src = exists ? gifUrl : pokemon.sprites.front_default;
+    });
+}
 // function salvaNomi(){
 //     localStorage.setItem("nomiSalvati", JSON.stringify(nomi));
 //     alert("Nomi salvati con successo");
 // }
-// function visualizzaPokemon(){
-//     //const pokedex=document.getElementById("pokedex");
-//     const pokemonImage=document.getElementById("pokedex-pokemon-image");
-//     const pokemonName=document.getElementById("pokedex-nome-pokemon");
-//     pokemonImage.innerHTML = '';
-//     pokemonName.innerHTML = '';
-//     pokedex.forEach(pokedex=> {
-//         const imgPokemon=document.createElement("img");
-//         imgPokemon.src=pokedex.sprites.front_default;
-//         const nomePokemon=document.createElement("p");
-//         nomePokemon.textContent=pokedex.forms[0].name;
-//         //console.log(imgPokemon);
-//         pokemonImage.appendChild(imgPokemon);
-//         pokemonImage.appendChild(pokemonName);
-//     })
+// function visualizzaPokemon() {
+//     const pokemonImageContainer = document.getElementById("pokedex-pokemon-image");
+//     const pokemonNameContainer = document.getElementById("pokedex-nome-pokemon");
+    
+//     pokemonImageContainer.innerHTML = '';
+//     pokemonNameContainer.innerHTML = '';
+//     pokedex.forEach(pokemon => {
+//         const imgPokemon = document.createElement("img");
+//         imgPokemon.src = pokemon.sprites.front_default;
+//         const nomePokemon = document.createElement("p");
+//         nomePokemon.textContent = pokemon.forms[0].name;
+//         pokemonImageContainer.appendChild(imgPokemon);
+//         pokemonNameContainer.appendChild(nomePokemon);
+//     });
 // }
 function visualizzaPokemon() {
     const pokemonImageContainer = document.getElementById("pokedex-pokemon-image");
-    const pokemonNameContainer = document.getElementById("pokedex-nome-pokemon");
-    
+    // const pokemonNameContainer = document.getElementById("pokedex-nome-pokemon");
+
     pokemonImageContainer.innerHTML = '';
-    pokemonNameContainer.innerHTML = '';
+    // pokemonNameContainer.innerHTML = '';
     pokedex.forEach(pokemon => {
+        // Crea l'immagine del Pokémon
         const imgPokemon = document.createElement("img");
         imgPokemon.src = pokemon.sprites.front_default;
-        const nomePokemon = document.createElement("p");
-        nomePokemon.textContent = pokemon.forms[0].name;
+        imgPokemon.classList.add('pokedex-image'); // Aggiungi una classe per lo stile
+
+        // Aggiungi un listener al clic
+        imgPokemon.addEventListener('click', () => mostraPokemonInCard(pokemon));
+
+        // Crea il nome del Pokémon
+        // const nomePokemon = document.createElement("p");
+        // nomePokemon.textContent = pokemon.forms[0].name;
+
+        // Aggiungi gli elementi al container
         pokemonImageContainer.appendChild(imgPokemon);
-        pokemonNameContainer.appendChild(nomePokemon);
+        // pokemonNameContainer.appendChild(nomePokemon);
     });
 }
 document.getElementById("pokeball").addEventListener("click",catchPokemon);
@@ -177,4 +210,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // const randomPokemonId = getRandomPokemonId();
-// fetchPokemonImage(randomPokemonId);
+// fetchPokemonImage(randomPokemonId);          
