@@ -1,0 +1,189 @@
+:root {
+    --card-height: 450px; /* Aumentato per dare più spazio alla card */
+    --card-width: calc(var(--card-height) / 1.2); /* Aumentato per una card più larga */
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column; /* Modifica fondamentale */
+    justify-content: flex-start; /* Posiziona gli elementi dall'alto */
+    align-items: center;
+    background: #191c29;
+    overflow: auto; /* Consenti scrolling se necessario */
+}
+    
+.card {
+    width: var(--card-width);
+    height: var(--card-height);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 0 36px;
+    perspective: 2500px;
+    margin: 0 50px;
+    cursor: pointer;
+    padding-bottom: 10px; /* Aggiungi spazio sotto la card per la Pokéball */
+}
+
+.cover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    z-index: 2;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out, z-index 0.3s ease-in-out;
+}
+
+.gif-image {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Adatta l'immagine alla card */
+    opacity: 0; /* Invisibile di default */
+    z-index: 3; /* Sopra l'immagine statica */
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* .gif-image {
+    opacity: 1;
+} */
+
+/* .pokemon-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    z-index: 2;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+} */
+
+.pokemon-image {
+    opacity: 1; /* Nascondila di default */
+}
+
+.card:hover .gif-image {
+    opacity: 1; /* La GIF diventa visibile */
+    z-index: 3; /* Assicurati che sia sopra */
+}
+
+.card:hover .pokemon-image {
+    opacity: 0; /* La rende invisibile */
+    z-index: 1; /* La manda sotto la GIF */
+}
+.card:hover .cover-image {
+    opacity: 0; /* La rende invisibile */
+    z-index: 1; /* La manda sotto la GIF */
+}
+
+.wrapper {
+    transition: all 0.5s;
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+}
+
+.card:hover .wrapper {
+    transform: perspective(900px) translateY(-5%) rotateX(25deg) translateZ(0);
+    box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+}
+
+.wrapper::before,
+.wrapper::after {
+    content: "";
+    opacity: 0;
+    width: 100%;
+    height: 80px;
+    transition: all 0.5s;
+    position: absolute;
+    left: 0;
+}
+
+.wrapper::before {
+    top: 0;
+    height: 100%;
+    background-image: linear-gradient(
+        to top,
+        transparent 46%,
+        rgba(12, 13, 19, 0.5) 68%,
+        rgba(12, 13, 19) 97%
+    );
+}
+
+.wrapper::after {
+    bottom: 0;
+    opacity: 1;
+    background-image: linear-gradient(
+        to bottom,
+        transparent 46%,
+        rgba(12, 13, 19, 0.5) 68%,
+        rgba(12, 13, 19) 97%
+    );
+}
+
+.card:hover .wrapper::before,
+.wrapper::after {
+    opacity: 1;
+}
+
+.card:hover .wrapper::after {
+    height: 120px;
+}
+
+.title {
+    width: 100%;
+    transition: transform 0.5s;
+}
+
+.card:hover .title {
+    transform: translate3d(0%, -50px, 100px);
+}
+
+.pokedex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Spazio tra le card */
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.pokedex-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hidden {
+    display: none;
+}
+
+.pokedex-image, .hover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.card:hover .wrapper img {
+    opacity: 0.5;
+}

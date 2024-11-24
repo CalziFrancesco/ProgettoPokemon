@@ -1,4 +1,5 @@
 //da 1 a 1025, da 10001 a 10277
+//zekrom 644
 const pokemonInfo=[]; 
 function getRandomPokemonId() {
     return Math.floor(Math.random() * 1302) + 1;
@@ -147,7 +148,11 @@ let pokedex=[];
 function loadPokedex(){
     pokedex = JSON.parse(localStorage.getItem("savedPokemon")) || [];
 }
-
+function clearPokedex() {
+    localStorage.removeItem("savedPokemon");
+    pokedex = [];
+    console.log("Pokedex eliminata con successo!");
+}
 function catchPokemon(){
     const giaCatturato = pokedex.some(pokemon => pokemon.forms[0].name === pokemonInfo[0].forms[0].name);
     
@@ -157,6 +162,7 @@ function catchPokemon(){
     }
     pokedex.push(pokemonInfo[0]);
     localStorage.setItem("savedPokemon",JSON.stringify(pokedex));
+    console.log("Pokémon salvato:", pokemonInfo[0]);
     //visualizzaPokemon();
     // localStorage.clear("savedPokemon");
 }
