@@ -7,8 +7,14 @@
     <title>Document</title>
 </head>
 <body>
-
+<div class="container">
+    <img src="blendBoard.png" id="titolo">      </div>
     <div class="container">
+        <div class="buttons">
+            <!-- <img src="Pokeball.jpeg" id="pokeball2" class="pokeball" onclick="fermaButton()">
+            <img src="Pokeball.jpeg" id="home" class="pokeball" onclick="avviaButton()"> -->
+            <img src="Pokeball.jpeg" id="home" class="pokeball" onclick="location.href='index1.html'">
+        </div>
         <div class="card">
             <div class="wrapper">
                 <div id="pokemon-image"></div>
@@ -16,13 +22,16 @@
             </div>
             <p id="nome-pokemon"></p>
         </div>
-        <button id="pokeball" style="border: none; outline: none; background-color: transparent;" onclick="catchPokemon()"></button></div>
-       <div> <img src="Pokeball.jpeg" id="pokeball2" class="pokeball" onclick="fermaButton()"></button></div>   
-      <div>  <img src="pokeball pgn.png" id="home" class="pokeball" onclick="avviaButton()"></button></div>
-    
+        <button id="pokeball" style="border: none; outline: none; background-color: transparent;" onclick="catchPokemon()"></button>
+        <button id="clear-pokedex-button" onclick="clearPokedex()">Svuota Pokedex</button>
 
-    <div id="pokedex-pokemon-image"></div>
-    <p id="pokedex-nome-pokemon"></p>
+    </div>
+
+
+    <!-- <div id="pokedex-container">
+        <div id="pokedex-pokemon-image"></div>
+        <p id="pokedex-nome-pokemon"></p>
+    </div> -->
 
     <script src="script.js"></script>
 </body>
