@@ -9,14 +9,18 @@
 
 body {
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     margin: 0;
     display: flex;
     flex-direction: column; /* Modifica fondamentale */
     justify-content: flex-start; /* Posiziona gli elementi dall'alto */
     align-items: center;
-    background: #191c29;
-    overflow: auto; /* Consenti scrolling se necessario */
+    background-image: url("forest.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+  /*  overflow: auto; /* Consenti scrolling se necessario */
+    
 }
 
 .container {
@@ -80,7 +84,7 @@ body {
     height: 100%;
     background-image: linear-gradient(
         to top,
-        transparent 46%,
+        transparent 100%,
         rgba(12, 13, 19, 0.5) 68%,
         rgba(12, 13, 19) 97%
     );
@@ -91,7 +95,7 @@ body {
     opacity: 1;
     background-image: linear-gradient(
         to bottom,
-        transparent 46%,
+        transparent 100%,
         rgba(12, 13, 19, 0.5) 68%,
         rgba(12, 13, 19) 97%
     );
@@ -173,12 +177,14 @@ body {
 
 /* Stile per il nome del Pokémon */
 #nome-pokemon {
+    top: 250px;
     position: absolute;
-    bottom: 10px;
-    font-size: 22px; /* Aumentato per renderlo più visibile */
-    font-weight: bold;
-    color: #fff;
+    font-size: 30px; /* Aumentato per renderlo più visibile */
+    /* font-weight: bold; */
+    color: #000000;
     z-index: 2;
+    font-family: 'custom-font';
+    text-align: left;
 }
 
 /* Stile per il pulsante Pokeball */
@@ -247,8 +253,32 @@ body {
 }
 
 
-#titolo {
+.titolo {
+    top: 5px;
     width: 750px;
     height: 500px;
     
+}
+
+.goToPokedex{
+    position: absolute;
+    left: 800px; 
+    width: 310px;
+    height: 100px;
+    top: 1px;
+    cursor: pointer;
+}
+
+.svuotapokedex{
+    position: absolute;
+    left: 800px; 
+    width: 310px;
+    height: 100px;
+    top: 100%;
+    cursor: pointer;
+}
+
+@font-face {
+    font-family:'custom-font';
+    src: url(font/Pokemon\ Solid.ttf);
 }
