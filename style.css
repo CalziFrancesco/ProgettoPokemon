@@ -1,6 +1,6 @@
 :root {
-    --card-height: 450px; /* Aumentato per dare più spazio alla card */
-    --card-width: calc(var(--card-height) / 1.2); /* Aumentato per una card più larga */
+    --card-height: 450px;
+    --card-width: calc(var(--card-height) / 1.2);
 }
 
 * {
@@ -12,18 +12,18 @@ body {
     height: 100vh;
     margin: 0;
     display: flex;
-    flex-direction: column; /* Modifica fondamentale */
-    justify-content: flex-start; /* Posiziona gli elementi dall'alto */
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
     background: #191c29;
-    overflow: auto; /* Consenti scrolling se necessario */
+    overflow: auto;
 }
 
 .container {
     position: relative;
-    width: 300px; /* Larghezza della card */
-    height: 400px; /* Altezza della card */
-    margin: auto; /* Centra la card nella pagina */
+    width: 300px;
+    height: 400px;
+    margin: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,7 +40,7 @@ body {
     perspective: 2500px;
     margin: 0 50px;
     cursor: pointer;
-    padding-bottom: 10px; /* Aggiungi spazio sotto la card per la Pokéball */
+    padding-bottom: 10px;
 }
 
 .cover-image {
@@ -49,7 +49,6 @@ body {
     object-fit: cover;
 }
 
-/* Wrapper per l'immagine e la GIF */
 .wrapper {
     transition: all 0.5s;
     position: absolute;
@@ -128,9 +127,6 @@ body {
     transform: translate3d(0%, -30%, 100px);
 }
 
-/* Nuove aggiunte per la tua implementazione */
-
-/* Il contenitore per l'immagine statica del Pokémon */
 #pokemon-image {
     width: 100%;
     height: 100%;
@@ -139,49 +135,47 @@ body {
     position: relative;
 }
 
-/* L'immagine hover (la GIF) */
+
 #hover-image {
     position: absolute;
-    top: 0; /* Posiziona la GIF sopra la card */
+    top: 0;
     left: 50%;
-    transform: translateX(-50%); /* Centra la GIF */
-    width: 120%; /* Aumentato per garantire che la GIF sia abbastanza grande */
+    transform: translateX(-50%); 
+    width: 120%;
     height: auto;
-    opacity: 0; /* Inizialmente invisibile */
-    z-index: 10;  /* Assicurati che la GIF abbia un alto z-index, ma più basso della card */
-    transition: opacity 0.3s ease-in-out; /* Transizione per un effetto morbido */
+    opacity: 0;
+    z-index: 10;
+    transition: opacity 0.3s ease-in-out;
     max-width: 100%;
     max-height: 100%;
 }
 
-/* La GIF dovrebbe diventare visibile solo quando la card è hoverata */
 .card:hover #hover-image {
-    opacity: 1; /* La GIF diventa visibile */
-    transition: opacity 0.3s ease-in-out; /* Transizione per l'opacità */
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
 }
 
-/* Nascondi l'immagine statica quando la card è hoverata */
+
 .card:hover #pokemon-image .cover-image {
-    opacity: 0; /* Nascondi l'immagine statica */
+    opacity: 0;
 }
 
-/* La copertura dell'immagine del Pokémon, visibile di default */
+
 #pokemon-image .cover-image {
-    opacity: 1; /* L'immagine statica è visibile di default */
-    transition: opacity 0.3s ease-in-out; /* Transizione dolce */
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
 }
 
-/* Stile per il nome del Pokémon */
+
 #nome-pokemon {
     position: absolute;
     bottom: 10px;
-    font-size: 22px; /* Aumentato per renderlo più visibile */
+    font-size: 22px;
     font-weight: bold;
     color: #fff;
     z-index: 2;
 }
 
-/* Stile per il pulsante Pokeball */
 /* #pokeball {
     
 } */
@@ -217,7 +211,7 @@ body {
     
 .pokedex-image:hover {
     transform: scale(1.1);
-    border-color: #ffcb05; /* Colore ispirato ai Pokémon */
+    border-color: #ffcb05;
 }
 
 /* #pokedex-container {
@@ -226,22 +220,21 @@ body {
 
 .buttons {
     position: absolute;
-    top: -70px; /* Posiziona i pulsanti sopra la card */
+    top: -70px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 20px; /* Spaziatura tra i pulsanti */
-    z-index: 10; /* Porta i pulsanti in primo piano */
+    gap: 20px;
+    z-index: 10;
 }
 
-/* Stile per i button */
 .pokeball {
-    width: 50px; /* Dimensione del button */
+    width: 50px;
     height: 50px;
-    cursor: pointer; /* Cambia il cursore al passaggio */
-    transition: transform 0.3s; /* Effetto hover */
+    cursor: pointer;
+    transition: transform 0.3s; 
 }
 
 .pokeball:hover {
-    transform: scale(1.1); /* Leggero zoom quando si passa sopra */
+    transform: scale(1.1);
 }

@@ -59,7 +59,9 @@ async function visualizzaPokemon() {
 
             // Aggiungi la card al container
             pokemonContainer.appendChild(card);
-            imgPokemon.addEventListener('click', location.href='index2.html');
+            imgPokemon.addEventListener('click', () => {
+                location.href = 'index2.html';
+            });
         } catch (error) {
             console.error("Errore nella visualizzazione del Pokémon:", pokemon, error);
         }
