@@ -59,13 +59,18 @@ async function visualizzaPokemon() {
 
             // Aggiungi la card al container
             pokemonContainer.appendChild(card);
-            imgPokemon.addEventListener('click', () => {
+            card.addEventListener('click', () => {
                 location.href = 'index2.html';
+                salvaPokemonNelStorage(pokemon);
             });
         } catch (error) {
             console.error("Errore nella visualizzazione del Pokémon:", pokemon, error);
         }
     }
+}
+function salvaPokemonNelStorage(pokemon) {
+    localStorage.setItem("savedPokemonVisual", JSON.stringify(pokemon));
+    console.log("Pokémon salvato:", pokemon);
 }
 
 document.addEventListener("DOMContentLoaded",loadPokedex);
