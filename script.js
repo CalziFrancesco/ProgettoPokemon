@@ -81,53 +81,53 @@ function startLoop() {
     }
 }
 
-function fermaButton() {
-    if(running){
-    running = false;
+// function fermaButton() {
+//     if(running){
+//     running = false;
 
-    document.getElementById('pokemon-image').innerHTML = '';
-    document.getElementById('hover-image').innerHTML = '';
-    document.getElementById('pokeball').innerHTML = '';
+//     document.getElementById('pokemon-image').innerHTML = '';
+//     document.getElementById('hover-image').innerHTML = '';
+//     document.getElementById('pokeball').innerHTML = '';
     
-    const lastPokemon = pokedex[pokedex.length-1];
+//     const lastPokemon = pokedex[pokedex.length-1];
 
-    // Mostra l'immagine del Pokémon
-    const img = document.createElement('img');
-    img.src = lastPokemon.sprites.front_default;
-    img.classList.add('cover-image');
-    document.getElementById('pokemon-image').appendChild(img);
+//     // Mostra l'immagine del Pokémon
+//     const img = document.createElement('img');
+//     img.src = lastPokemon.sprites.front_default;
+//     img.classList.add('cover-image');
+//     document.getElementById('pokemon-image').appendChild(img);
 
-    // Mostra il nome del Pokémon
-    document.getElementById('nome-pokemon').textContent = lastPokemon.forms[0].name;
+//     // Mostra il nome del Pokémon
+//     document.getElementById('nome-pokemon').textContent = lastPokemon.forms[0].name;
 
-    // Gestisci la GIF per l'hover effect
-    const hoverImg = document.getElementById('hover-image');
-    const gifUrl = `https://raw.githubusercontent.com/tdmalone/pokecss-media/master/graphics/pokemon/ani-front-shiny/${lastPokemon.forms[0].name}.gif`;
+//     // Gestisci la GIF per l'hover effect
+//     const hoverImg = document.getElementById('hover-image');
+//     const gifUrl = `https://raw.githubusercontent.com/tdmalone/pokecss-media/master/graphics/pokemon/ani-front-shiny/${lastPokemon.forms[0].name}.gif`;
 
-    esiste(gifUrl).then((exists) => {
-        hoverImg.src = exists ? gifUrl : lastPokemon.sprites.front_default;
-    });
+//     esiste(gifUrl).then((exists) => {
+//         hoverImg.src = exists ? gifUrl : lastPokemon.sprites.front_default;
+//     });
 
-    visualizzaPokemon();
-    document.getElementById('pokedex-container').style.display = 'flex';
-    }
+//     visualizzaPokemon();
+//     document.getElementById('pokedex-container').style.display = 'flex';
+//     }
     
-}
+// }
 
-function avviaButton() {
-    if(!running){
-    running = true;    
-    document.getElementById('pokedex-pokemon-image').innerHTML = '';
-    document.getElementById('pokedex-nome-pokemon').innerHTML = '';
-    document.getElementById('pokemon-image').innerHTML = '';
-    document.getElementById('hover-image').innerHTML = '';
-    // document.getElementById('nome-pokemon').innerHTML = '';
-    document.getElementById('pokeball').innerHTML = '';
-    //document.getElementById('pokeball2').innerHTML = '';
-    //document.getElementById('home').innerHTML = '';
-    loop();
-    }
-}
+// function avviaButton() {
+//     if(!running){
+//     running = true;    
+//     document.getElementById('pokedex-pokemon-image').innerHTML = '';
+//     document.getElementById('pokedex-nome-pokemon').innerHTML = '';
+//     document.getElementById('pokemon-image').innerHTML = '';
+//     document.getElementById('hover-image').innerHTML = '';
+//     // document.getElementById('nome-pokemon').innerHTML = '';
+//     document.getElementById('pokeball').innerHTML = '';
+//     //document.getElementById('pokeball2').innerHTML = '';
+//     //document.getElementById('home').innerHTML = '';
+//     loop();
+//     }
+// }
 
 async function loop() {
 

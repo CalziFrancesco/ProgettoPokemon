@@ -35,7 +35,8 @@ async function visualizzaPokemon() {
             imgPokemon.classList.add('pokemon-image');
 
             const hoverImg = document.createElement('img');
-            hoverImg.classList.add('gif-image');
+            hoverImg.classList.add('hover-image');
+            hoverImg.src="";
             const shinyUrl = `https://raw.githubusercontent.com/tdmalone/pokecss-media/master/graphics/pokemon/ani-front-shiny/${pokemon.forms[0].name}.gif`;
             hoverImg.src = (await esiste(shinyUrl)) ? shinyUrl : pokemon.sprites.front_default;
             console.log("Visualizzando Pokémon:", pokemon);
@@ -58,11 +59,13 @@ async function visualizzaPokemon() {
 
             // Aggiungi la card al container
             pokemonContainer.appendChild(card);
+            imgPokemon.addEventListener('click', location.href='index2.html');
         } catch (error) {
             console.error("Errore nella visualizzazione del Pokémon:", pokemon, error);
         }
     }
 }
+
 document.addEventListener("DOMContentLoaded",loadPokedex);
 document.addEventListener("DOMContentLoaded", () => {
     loadPokedex();
