@@ -151,19 +151,22 @@ document
       open = false;
     }
   });
-document.addEventListener("DOMContentLoaded",()=>{
+  
+document.addEventListener("DOMContentLoaded", () => {
   const pokemonContainer = document.getElementById("pokedex-container");
-  const search=document.getElementById("poke-search")
-  search.addEventListener("input",()=>{
-    pokemonContainer.innerHTML = '';
-    const searchTerm = search.value.toLowerCase();
-    pokedex.forEach(pokemon=>{
-      const pokemonStr=pokemon.forms[0].name;
-      if(pokemonStr.includes(searchTerm)){
-        ShpokemonSrc(pokemon);
-      }
-    })
-  })
-})
+  const search = document.getElementById("poke-search");
+  
+  search.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      pokemonContainer.innerHTML = '';
+      const searchTerm = search.value.toLowerCase();
 
-
+      pokedex.forEach(pokemon => {
+        const pokemonStr = pokemon.forms[0].name.toLowerCase();
+        if (pokemonStr.includes(searchTerm)) {
+          ShpokemonSrc(pokemon);
+        }
+      });
+    }
+  });
+});
