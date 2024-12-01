@@ -267,3 +267,44 @@ p {
     width: 7%;
     cursor: pointer; /* cambia il cursore su hover */
 }
+
+.button-container {
+    width: 50%;
+    height: 10%;
+    background-color: #212529;
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 20px;
+    justify-content: center;
+    outline: 4px solid white;
+    outline-offset: -10px;
+    z-index: 1;
+    padding-bottom: 25px;
+}
+
+.button {
+    font-family: 'custom-font';
+    word-spacing: 5px;
+    font-size: 16px;
+    color: white;
+    background-color: #dc0a2d;
+    border: none;
+    padding: 10px 25px;
+    position: relative;
+    cursor: pointer;
+}
+
+.button::after {
+    content: '';
+    position: absolute;
+    bottom: -5px; /* estende l'ombra sotto */
+    right: -5px; /* estende l'ombra a destra */
+    width: calc(100% + 7px); /* aumenta la larghezza dell'ombra */
+    height: calc(100% + 5px); /* aumenta l'altezza dell'ombra */
+    background-color: #7a0317; /* colore dell'ombra */
+    z-index: -1; /* posiziona l'ombra sotto il bottone */
+}
+
+.button:active {
+    transform: translate(5px, 5px); /* sposta il bottone quando cliccato */
+}

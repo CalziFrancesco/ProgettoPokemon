@@ -60,12 +60,13 @@ async function visualizzaPokemon(){
 
     // mostra i tipi del pokemon
     const pokType = document.createElement('p');
-    let types = ''; // variabile per concatenare i tipi
+    // let types = ''; // variabile per concatenare i tipi
+    const types = pokemon[0].types.map(element => element.type.name).join(', ');
 
     // per ogni tipo del pokemon, aggiungiamo il nome del tipo alla stringa 'types'
-    pokemon[0].types.forEach((element) => {
-        types += ` ${element.type.name} `;
-    });
+    // pokemon[0].types.forEach((element) => {
+    //     types += ` ${element.type.name} `;
+    // });
 
     pokType.textContent = types; // imposta il testo dei tipi
     type.appendChild(pokType); // aggiunge i tipi alla pagina
@@ -194,3 +195,21 @@ document.addEventListener("DOMContentLoaded", loadPokemon);
 document.addEventListener("DOMContentLoaded", () => {
     visualizzaPokemon(); // visualizza il pokemon dopo che è stato caricato
 });
+function removeCurrentPokemon() {
+    // poemon visualizzato
+    const savedPokemon = JSON.parse(localStorage.getItem("savedPokemonVisual"));
+    if (!savedPokemon) {
+        alert("Nessun Pokémon da rimuovere!");
+        return;
+    }
+
+    // Recupero e filtramento della lista
+    let pokedex = JSON.parse(localStorage.getItem("savedPokemon")) || [];
+    pokedex = pokedex.filter(pokemon => pokemon.forms[0].name !== savedPokemon.forms[0].name);
+
+    // Aggiornamento
+    localStorage.setItem("savedPokemon", JSON.stringify(pokedex));
+    localStorage.removeItem("savedPokemonVisual");
+    alert(`${savedPokemon.forms[0].name} è stato rimosso dal Pokédex.`);
+    location.href = "index1.html";
+}

@@ -76,6 +76,8 @@ async function visualizzaPokemon() {
         pokemonContainer.appendChild(txt);
     }
 
+    pokedex.sort((a, b) => a.forms[0].name.localeCompare(b.forms[0].name));
+
     // Ciclo sui Pokémon nel Pokedex
     for (const pokemon of pokedex) {
         try {

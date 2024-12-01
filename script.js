@@ -7,12 +7,12 @@ function getRandomPokemonId() {
 
 // funzione per calcolare un tempo casuale che rappresenta il "tempo di vita" del pokemon in millisecondi
 function timeAlive() {
-    return Math.floor(Math.random() * (8000 - 7000 + 1)) + 7000;
+    return Math.floor(Math.random() * (4000 - 5000 + 1)) + 5000;
 }
 
 // funzione per calcolare un tempo casuale che rappresenta il "tempo non vivo" del pokemon in millisecondi
 function timeNotAlive() {
-    return Math.floor(Math.random() * (2000 - 1000 + 1)) + 1000;
+    return Math.floor(Math.random() * (4000 - 5000 + 1)) + 5000;
 }
 
 // funzione che verifica se una URL esiste
