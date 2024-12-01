@@ -1,108 +1,98 @@
 :root {
-    --card-height: 450px; /* Aumentato per dare più spazio alla card */
-    --card-width: calc(var(--card-height) / 1.2); /* Aumentato per una card più larga */
+    --card-height: 450px; /* altezza della card, aumentata per dare più spazio */
+    --card-width: calc(var(--card-height) / 1.2); /* larghezza della card, calcolata in base all'altezza */
 }
 
 * {
-    box-sizing: border-box;
+    box-sizing: border-box; /* assicurarsi che il padding e il bordo siano inclusi nelle dimensioni degli elementi */
 }
 
 body {
-    width: 100vw;
-    height: 100%;
-    margin: 0;
     display: flex;
     flex-direction: column; 
     justify-content: flex-start;
     align-items: center;
-    background-color: #dc0a2d;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-  
-    
+    background-color: #dc0a2d; /* colore di sfondo del body */
 }
 
-.name-container{
+.name-container {
     width: 50%;
-    background-color: #212529;
+    background-color: #212529; /* colore di sfondo del contenitore del nome */
     display: flex;
     justify-content: center;
-    outline: 4px solid white;
-    outline-offset: -10px;
+    outline: 4px solid white; /* bordo bianco attorno al contenitore */
+    outline-offset: -10px; /* distanzia il bordo dal contenuto */
     margin-bottom: 10px;
     margin-top: 10px;
 }
 
 .container {
     width: 50%;
-    background-color: #212529;
+    background-color: #212529; /* colore di sfondo per il contenitore */
     display: flex; 
     justify-content: center;
     align-items: center; 
-    outline: 4px solid white;
-    outline-offset: -10px;
+    outline: 4px solid white; /* bordo bianco attorno al contenitore */
+    outline-offset: -10px; /* distanzia il bordo dal contenuto */
     margin-bottom: 10px;
 }
 
 #stats-container {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: row; /* disporre le statistiche in una riga */
+    flex-wrap: wrap; /* permette alle statistiche di andare a capo */
     align-items: center;
     justify-content: center;
     margin-bottom: 15px;
     padding: 40px;
 }
 
-#stats{
+#stats {
     width: 50%;
-    background-color: #212529;
+    background-color: #212529; /* colore di sfondo per le statistiche */
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* disporre le statistiche in colonna */
     flex-wrap: wrap;
     align-items: center;
     margin-bottom: 15px;
     padding: 40px;
-    outline: 4px solid white;
-    outline-offset: -10px;
+    outline: 4px solid white; /* bordo bianco attorno alla sezione delle statistiche */
+    outline-offset: -10px; /* distanzia il bordo dal contenuto */
 }
-    
+
 .card {
-    width: var(--card-width);
-    height: var(--card-height);
+    width: var(--card-width); /* larghezza della card, dipende dall'altezza definita sopra */
+    height: var(--card-height); /* altezza della card */
     position: relative;
     display: flex;
     justify-content: center;
     padding: 0 36px;
     margin-top: 30px;   
-    cursor: pointer;
-    z-index: 15;
+    cursor: pointer; /* cambia il cursore quando si passa sopra la card */
+    z-index: 15; /* posizione sopra gli altri elementi */
 }
-
 
 .cover-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* adatta l'immagine per coprire l'area della card */
 }
 
-/* Wrapper per l'immagine e la GIF */
+/* wrapper per l'immagine statica e la GIF */
 .wrapper {
-    transition: all 0.5s;
+    transition: all 0.5s; /* transizione fluida per il cambiamento di stato */
     position: absolute;
     width: 100%;
-    z-index: -1;
+    z-index: -1; /* posizione sotto la card */
 }
-
 
 .wrapper::before,
 .wrapper::after {
     content: "";
-    opacity: 0;
+    opacity: 0; /* inizialmente invisibile */
     width: 100%;
     height: 80px;
-    transition: all 0.5s;
+    transition: all 0.5s; /* transizione fluida per i cambiamenti */
     position: absolute;
     left: 0;
 }
@@ -110,102 +100,94 @@ body {
 .wrapper::before {
     top: 0;
     height: 100%;
-    background-image: linear-gradient(
-        to top,
-        transparent 100%
-    );
+    background-image: linear-gradient(to top, transparent 100%); /* effetto di gradiente sopra la card */
 }
 
 .wrapper::after {
     bottom: 0;
-    opacity: 1;
-    background-image: linear-gradient(
-        to bottom,
-        transparent 100%,
-    );
+    opacity: 1; /* visibile nella parte inferiore */
+    background-image: linear-gradient(to bottom, transparent 100%); /* effetto di gradiente sotto la card */
 }
 
 .card:hover .wrapper::before,
 .wrapper::after {
-    opacity: 0;
+    opacity: 0; /* nasconde i gradienti quando la card viene hoverata */
 }
 
 .card:hover .wrapper::after {
-    height: 120px;
+    height: 120px; /* aumenta l'altezza del gradiente inferiore durante l'hover */
 }
 
 .title {
     width: 100%;
-    transition: transform 0.5s;
+    transition: transform 0.5s; /* transizione per il movimento del titolo */
 }
 
 .card:hover .title {
-    transform: translate3d(0%, -50px, 100px);
+    transform: translate3d(0%, -50px, 100px); /* anima il titolo spostandolo quando la card viene hoverata */
 }
 
 .character {
     width: 100%;
-    opacity: 0;
-    transition: all 0.5s;
+    opacity: 0; /* inizialmente invisibile */
+    transition: all 0.5s; /* transizione fluida per la visibilità */
     position: absolute;
-    z-index: -1;
+    z-index: -1; /* posiziona l'elemento dietro la card */
 }
 
 .card:hover .character {
-    opacity: 1;
-    transform: translate3d(0%, -30%, 100px);
+    opacity: 1; /* rende visibile la caratteristica durante l'hover */
+    transform: translate3d(0%, -30%, 100px); /* anima la caratteristica per farla salire */
 }
 
-/* Nuove aggiunte per la tua implementazione */
-
-/* Il contenitore per l'immagine statica del Pokémon */
+/* il contenitore per l'immagine statica del Pokémon */
 #pokemon-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
+    object-fit: cover; /* adatta l'immagine per coprire l'area */
+    border-radius: 10px; /* bordi arrotondati */
     position: relative;
 }
 
-/* L'immagine hover (la GIF) */
+/* l'immagine hover (la GIF) */
 #hover-image {
     position: absolute;
-    top: 0; /* Posiziona la GIF sopra la card */
+    top: 0; /* posiziona la GIF sopra la card */
     left: 50%;
-    transform: translateX(-50%); /* Centra la GIF */
-    width: 120%; /* Aumentato per garantire che la GIF sia abbastanza grande */
+    transform: translateX(-50%); /* centra la GIF orizzontalmente */
+    width: 120%; /* ingrandisce la GIF per coprire meglio la card */
     height: auto;
-    opacity: 0; /* Inizialmente invisibile */
-    z-index: 10;  /* Assicurati che la GIF abbia un alto z-index, ma più basso della card */
-    transition: opacity 0.3s ease-in-out; /* Transizione per un effetto morbido */
-    max-width: 100%;
+    opacity: 0; /* inizialmente invisibile */
+    z-index: 10; /* posiziona la GIF sopra gli altri elementi */
+    transition: opacity 0.3s ease-in-out; /* transizione morbida per l'opacità */
+    max-width: 100%; 
     max-height: 100%;
 }
 
-/* La GIF dovrebbe diventare visibile solo quando la card è hoverata */
+/* la GIF diventa visibile quando la card viene hoverata */
 .card:hover #hover-image {
-    opacity: 1; /* La GIF diventa visibile */
-    transition: opacity 0.3s ease-in-out; /* Transizione per l'opacità */
+    opacity: 1; /* rende visibile la GIF */
+    transition: opacity 0.3s ease-in-out; /* transizione per l'opacità */
 }
 
-/* Nascondi l'immagine statica quando la card è hoverata */
+/* nascondi l'immagine statica quando la card è hoverata */
 .card:hover #pokemon-image .cover-image {
-    opacity: 0; /* Nascondi l'immagine statica */
+    opacity: 0; /* nasconde l'immagine statica */
 }
 
-/* La copertura dell'immagine del Pokémon, visibile di default */
+/* immagine statica del Pokémon visibile di default */
 #pokemon-image .cover-image {
-    opacity: 1; /* L'immagine statica è visibile di default */
-    transition: opacity 0.3s ease-in-out; /* Transizione dolce */
+    opacity: 1; /* immagine visibile di default */
+    transition: opacity 0.3s ease-in-out; /* transizione morbida */
 }
 
 #nome-pokemon {
     bottom: 10px;
-    font-size: 22px;
+    font-size: 40px;
     font-weight: bold;
     color: #fff;
-    z-index: 2;
-    font-family: 'custom-font';
+    z-index: 2; /* posiziona sopra gli altri elementi */
+    font-family: 'custom-font'; /* font personalizzato */
 }
 
 .bar-container {
@@ -213,58 +195,75 @@ body {
     height: 15px;
     background-color: white;
     border-radius: 10px;
-    overflow: hidden; 
+    overflow: hidden; /* nasconde il contenuto che esce fuori dal contenitore */
     margin-right: 15px;
-    overflow: hidden;
 }
 
-/* Stili per la barra HP */
-.bar-hp {    
+/* stili per la barra HP */
+.bar-hp {
     height: 100%; 
-    background-color: green; 
+    background-color: green; /* colore verde per la barra HP */
     border-radius: 10px; 
 }
 
-.bar-attack {    
+.bar-attack {
     height: 100%;
-    background-color: red;
+    background-color: red; /* colore rosso per la barra Attack */
     border-radius: 10px;
 }
 
 .bar-defense {
     height: 100%; 
-    background-color: blue; 
+    background-color: blue; /* colore blu per la barra Defense */
     border-radius: 10px; 
 }
 
 .bar-speed {
     height: 100%; 
-    background-color: yellow; 
+    background-color: yellow; /* colore giallo per la barra Speed */
     border-radius: 10px; 
 }
 
 .bar-special-defense {
     height: 100%; 
-    background-color: rgb(96, 34, 178); 
+    background-color: rgb(96, 34, 178); /* colore personalizzato per Special Defense */
     border-radius: 10px; 
 }
 
-.bar-special-attack { 
+.bar-special-attack {
     height: 100%; 
-    background-color: rgb(237, 142, 19); 
+    background-color: rgb(237, 142, 19); /* colore personalizzato per Special Attack */
     border-radius: 10px; 
 }
+
 @font-face {
-    font-family:'custom-font';
-    src: url(font/ARCADECLASSIC.TTF);
+    font-family: 'custom-font'; /* definizione di un font personalizzato */
+    src: url(font/ARCADECLASSIC.TTF); /* percorso del font personalizzato */
 }
 
-p{
-    color: #fff;
-    font-family:'custom-font';
+p {
+    color: #fff; /* colore del testo dei paragrafi */
+    font-family: 'custom-font'; /* font personalizzato */
 }
 
-#type{
-    color: #fff;
-    font-family:'custom-font';
+#type {
+    color: #fff; /* colore del testo per i tipi di Pokémon */
+    font-family: 'custom-font'; /* font personalizzato */
+}
+
+/* posizione dei pulsanti per tornare alla Pokedex e andare alla Pokedex */
+.backPokedex {
+    position: absolute;
+    bottom: 80%;
+    right: 5%; 
+    width: 7%;
+    cursor: pointer; /* cambia il cursore su hover */
+}
+
+.goToPokedex {
+    position: absolute;
+    bottom: 80%;
+    left: 5%; 
+    width: 7%;
+    cursor: pointer; /* cambia il cursore su hover */
 }

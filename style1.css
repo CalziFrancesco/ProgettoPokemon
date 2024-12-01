@@ -1,74 +1,76 @@
 :root {
-    --card-height: 375px;
-    --card-width: calc(var(--card-height) / 1.2);
+    --card-height: 375px; /* altezza della card */
+    --card-width: calc(var(--card-height) / 1.2); /* larghezza della card in base all'altezza */
 }
 
 * {
-    box-sizing: border-box;
+    box-sizing: border-box; /* per includere padding e bordi nelle dimensioni totali degli elementi */
 }
 
 body {
-    width: 100vw;
-    height: 100vh;
-    margin: 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    background-color: #dc0a2d;
-    overflow: auto;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
+    background-color: #dc0a2d; /* colore di sfondo per il body */
 }
+
 .img-container{
     display: flex;
-    align-items: center;
+    align-items: center; /* allinea l'immagine al centro verticalmente */
 }
 
 #pokedex-container{
-    width: 85%;
+    width: 85%; /* larghezza del contenitore del pokedex */
     background-color: #212529;
     display: flex;
-    flex-wrap:wrap;
-    margin-top: 0px;
-    gap: 16px;
-    margin: 0 50px;
-    justify-content:center;
-    /* border: 5px solid white; */
+    flex-wrap: wrap; /* per far sì che le cards si adattino su più righe */
+    gap: 16px; /* spazio tra le cards */
+    margin-bottom: 10px;
+    justify-content: center; /* allinea le cards al centro */
+    outline: 4px solid white; /* bordo bianco intorno al contenitore */
+    outline-offset: -10px; /* sposta il bordo all'interno */
+}
+
+.button-container {
+    width: 85%;
+    height: 10%;
+    background-color: #212529;
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 20px;
+    justify-content: center;
     outline: 4px solid white;
     outline-offset: -10px;
+    z-index: 1;
+    padding-bottom: 25px;
 }
-    
+
 .card {
-    /* flex: 1 1 calc(33.33% - 16px); */
-    width: var(--card-width);
-    height: var(--card-height);
+    width: var(--card-width); /* larghezza dinamica della card */
+    height: var(--card-height); /* altezza dinamica della card */
     position: relative;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: flex-end; /* posiziona gli elementi in fondo alla card */
     padding: 0 36px;
     margin: 0 50px;
-    cursor: pointer;
+    cursor: pointer; /* cambia il cursore quando si passa sopra */
     padding-bottom: 10px;
     z-index: 15;
-    
 }
 
 .wrapper {
-    transition: all 0.5s;
+    transition: all 0.5s; /* transizione fluida per gli effetti */
     position: absolute;
     width: 100%;
     z-index: -1;
 }
 
-
-
 .wrapper::before,
 .wrapper::after {
     content: "";
-    opacity: 0;
+    opacity: 0; /* inizialmente invisibile */
     width: 100%;
     height: 80px;
     transition: all 0.5s;
@@ -81,7 +83,7 @@ body {
     height: 100%;
     background-image: linear-gradient(
         to top,
-        transparent 100%,
+        transparent 100%, /* effetto sfumato sopra */
     );
 }
 
@@ -90,89 +92,75 @@ body {
     opacity: 1;
     background-image: linear-gradient(
         to bottom,
-        transparent 100%,
+        transparent 100%, /* effetto sfumato sotto */
     );
 }
 
 .card:hover .wrapper::before,
 .wrapper::after {
-    opacity: 0;
+    opacity: 0; /* nasconde i gradienti al passaggio del mouse */
 }
 
 .card:hover .wrapper::after {
-    height: 120px;
+    height: 120px; /* aumenta l'altezza del gradiente inferiore al passaggio del mouse */
 }
 
 .title {
     width: 100%;
-    transition: transform 0.5s;
+    transition: transform 0.5s; /* transizione per il movimento del titolo */
 }
 
 .card:hover .title {
-    transform: translate3d(0%, -50px, 100px);
+    transform: translate3d(0%, -50px, 100px); /* sposta il titolo verso l'alto al passaggio del mouse */
 }
 
 .character {
     width: 100%;
-    opacity: 0;
+    opacity: 0; /* inizialmente invisibile */
     transition: all 0.5s;
     position: absolute;
     z-index: -1;
 }
 
 .card:hover .character {
-    opacity: 1;
-    transform: translate3d(0%, -30%, 100px);
+    opacity: 1; /* rende visibile la caratteristica al passaggio del mouse */
+    transform: translate3d(0%, -30%, 100px); /* sposta la caratteristica in alto */
 }
-
 
 .pokemon-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* mantiene le proporzioni dell'immagine */
     border-radius: 10px;
     position: relative;
 }
-
 
 .hover-image {
     position: absolute;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 120%;
+    width: 120%; /* ingrandisce l'immagine */
     height: auto;
-    opacity: 0;
+    opacity: 0; /* inizialmente invisibile */
     z-index: 10;
-    transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out; /* transizione per l'effetto di hover */
     max-width: 100%;
     max-height: 100%;
 }
 
-
 .card:hover .hover-image {
-    opacity: 1;
-    transition: opacity 0.3s ease-in-out;
+    opacity: 1; /* rende visibile l'immagine di hover al passaggio del mouse */
 }
 
-
-/* .card:hover .pokemon-image .cover-image {
-    opacity: 0; 
-} */
 .card:hover .pokemon-image {
-    opacity: 0; 
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    opacity: 0; /* nasconde l'immagine principale al passaggio del mouse */
 }
-
-
 
 .pokemon-image {
     opacity: 1;
     transition: opacity 0.3s ease-in-out;
 }
-
 
 .nome-pokemon {
     position: absolute;
@@ -184,30 +172,22 @@ body {
     font-family: 'custom-font';
 }
 
-
-/* #pokeball {
-    
-} */
-
-
-
-.backPokedex{
+.backPokedex {
     position: absolute;
-    left: 40px; 
+    left: 40px;
     top: 25px;
-    width: 7%;
+    width: 7%; /* posizione dell'icona per tornare al pokedex */
 }
 
-
-.titolo{
+.titolo {
     position: absolute;
     width: 400px;
     height: 200px;
     top: 1px;
     align-items: center;
-
 }
-  .search-container {
+
+.search-container {
     width: 85%;
     background-color: #212529;
     display: flex;
@@ -217,16 +197,17 @@ body {
     margin-bottom: 10px;
     outline: 4px solid white;
     outline-offset: -10px;
-  }
- 
-  .search-container img {
+}
+
+.search-container img {
     position: relative;
-    right: 42px;
+    right: 42px; /* posizione dell'icona di ricerca */
     height: 50px;
     cursor: pointer;
-    transition: all 1s;
-  }
-  .search-container input {
+    transition: all 1s; /* transizione per l'animazione dell'icona */
+}
+
+.search-container input {
     font-size: 20px;
     background-color: transparent;
     border: 1px white;
@@ -237,36 +218,74 @@ body {
     outline: none;
     border-radius: 20px;
     width: 0%;
-    opacity: 0%;
-    transition: all 1s;
+    opacity: 0%; /* inizialmente invisibile */
+    transition: all 1s; /* transizione per il campo di ricerca */
     padding: 5px;
     padding-left: 10px;
-  }
-  .search-container p {
+}
+
+.search-container p {
     position: relative;
     left: -20px;
     transition: all 0.2s 0.2s ease-in-out;
     width: fit-content;
     text-wrap: nowrap;
     font-family: 'custom-font';
-  }
-  .search-container p:last-child {
+}
+
+.search-container p:last-child {
     left: -45px;
     font-family: 'custom-font';
-  }
-  #poke-search{
+}
+
+#poke-search {
     background-color: white;
     font-family: 'custom-font';
-  }
-
-  @font-face {
-    font-family:'custom-font';
-    src: url(font/ARCADECLASSIC.TTF);
 }
-h1{
+
+@font-face {
+    font-family: 'custom-font';
+    src: url(font/ARCADECLASSIC.TTF); /* font personalizzata */
+}
+
+h1 {
     display: flex;
     align-content: center;
-    font-family:'custom-font';
+    font-family: 'custom-font';
     color: white;
-    font-size: 400%;
+    font-size: 400%; /* stile per il titolo */
+}
+
+.button {
+    font-family: 'custom-font';
+    word-spacing: 5px;
+    font-size: 16px;
+    color: white;
+    background-color: #dc0a2d; /* colore di sfondo per il bottone */
+    border: none;
+    padding: 10px 25px;
+    position: relative;
+    cursor: pointer;
+}
+
+.button::after {
+    content: '';
+    position: absolute;
+    bottom: -5px; /* estende l'ombra sotto */
+    right: -5px; /* estende l'ombra a destra */
+    width: calc(100% + 7px); /* aumenta la larghezza dell'ombra */
+    height: calc(100% + 5px); /* aumenta l'altezza dell'ombra */
+    background-color: #7a0317; /* colore dell'ombra */
+    z-index: -1; /* posiziona l'ombra sotto il bottone */
+}
+
+.button:active {
+    transform: translate(5px, 5px); /* sposta il bottone quando cliccato */
+}
+
+.messg {
+    font-family: 'custom-font';
+    word-spacing: 5px;
+    font-size: 32px;
+    color: white;
 }

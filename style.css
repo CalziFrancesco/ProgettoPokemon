@@ -1,36 +1,38 @@
+/* Definizione delle variabili CSS per le dimensioni della card */
 :root {
-    --card-height: 350px; /* Aumentato per dare più spazio alla card */
-    --card-width: calc(var(--card-height) / 1.2); /* Aumentato per una card più larga */
+    --card-height: 350px; /* Altezza della card */
+    --card-width: calc(var(--card-height) / 1.2); /* Larghezza della card calcolata in base all'altezza */
 }
 
+/* Imposta il box-sizing a border-box per tutti gli elementi */
 * {
     box-sizing: border-box;
 }
 
+/* Stili per il body della pagina */
 body {
-    height: 100%;
-    margin: 0;
     display: flex;
-    flex-direction: column; /* Modifica fondamentale */
-    justify-content: flex-start; /* Posiziona gli elementi dall'alto */
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
-    background-image: url("img/forest.png");
+    background-image: url("img/forest.png"); /* Immagine di sfondo */
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: cover;
-  /*  overflow: auto; /* Consenti scrolling se necessario */
-    
+    background-size: cover; /* Copre l'intera area dello schermo */
 }
 
+/* Contenitore principale della pagina */
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
-    
+
+/* Stili per la card del Pokémon */
 .card {
-    width: var(--card-width);
-    height: var(--card-height);
+    width: var(--card-width); /* Larghezza della card */
+    height: var(--card-height); /* Altezza della card */
     position: relative;
     display: flex;
     justify-content: center;
@@ -38,35 +40,37 @@ body {
     padding: 0 36px;
     margin: 0 50px;
     cursor: pointer;
-    padding-bottom: 10px; /* Aggiungi spazio sotto la card per la Pokéball */
+    padding-bottom: 10px; /* Aggiunge un po' di spazio nella parte inferiore della card */
 }
 
+/* L'immagine statica del Pokémon, che riempie l'intera card */
 .cover-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* Assicura che l'immagine copra l'intera area senza distorsioni */
 }
 
-/* Wrapper per l'immagine e la GIF */
+/* Wrapper per gli effetti di transizione */
 .wrapper {
-    transition: all 0.5s;
+    transition: all 0.5s; /* Transizione di 0.5 secondi per tutti gli effetti */
     position: absolute;
     width: 100%;
-    z-index: -1;
+    z-index: -1; /* Metti il wrapper dietro la card */
 }
 
-
+/* Effetti di transizione per la parte superiore e inferiore del wrapper */
 .wrapper::before,
 .wrapper::after {
     content: "";
-    opacity: 0;
+    opacity: 0; /* Inizialmente invisibile */
     width: 100%;
-    height: 80px;
-    transition: all 0.5s;
+    height: 80px; /* Altezza dell'area di transizione */
+    transition: all 0.5s; /* Transizione di 0.5 secondi */
     position: absolute;
     left: 0;
 }
 
+/* Gradiente sopra la card */
 .wrapper::before {
     top: 0;
     height: 100%;
@@ -76,55 +80,51 @@ body {
     );
 }
 
+/* Gradiente sotto la card */
 .wrapper::after {
     bottom: 0;
     opacity: 1;
     background-image: linear-gradient(
         to bottom,
-        transparent 100%,
+        transparent 100%
     );
 }
 
+/* Effetti hover sulla card per cambiare il gradiente */
 .card:hover .wrapper::before,
 .wrapper::after {
     opacity: 0;
 }
 
 .card:hover .wrapper::after {
-    height: 120px;
+    height: 120px; /* Aumenta l'altezza del gradiente inferiore durante l'hover */
 }
 
-.title {
-    width: 100%;
-    transition: transform 0.5s;
-}
 
-.card:hover .title {
-    transform: translate3d(0%, -50px, 100px);
-}
-
+/* Animazione per la visibilità del personaggio (immagine del Pokémon) */
 .character {
     width: 100%;
-    opacity: 0;
-    transition: all 0.5s;
+    opacity: 0; /* Inizialmente invisibile */
+    transition: all 0.5s; /* Transizione per l'opacità */
     position: absolute;
-    z-index: -1;
+    z-index: -1; /* Metti l'immagine dietro la card */
 }
 
 .card:hover .character {
-    opacity: 1;
-    transform: translate3d(0%, -30%, 100px);
+    opacity: 1; /* Rende visibile l'immagine del Pokémon durante l'hover */
+    transform: translate3d(0%, -30%, 100px); /* Sposta l'immagine verso l'alto durante l'hover */
 }
 
+/* Stili per l'immagine principale del Pokémon */
 #pokemon-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: 10px; /* Rende gli angoli dell'immagine arrotondati */
     position: relative;
 }
 
-/* L'immagine hover (la GIF) */
+/* L'immagine hover (la GIF animata) */
 #hover-image {
     position: absolute;
     top: 0; /* Posiziona la GIF sopra la card */
@@ -163,76 +163,53 @@ body {
     font-size: 22px;
     font-weight: bold;
     color: #fff;
-    z-index: 2;
-    font-family: 'custom-font';
+    z-index: 2; /* Assicura che il nome sia sopra altri elementi */
+    font-family: 'custom-font'; /* Usa il font personalizzato */
 }
 
-#pokeball img {
-    width: 150px;
-    height: auto;
-}
-
+/* Stili per la barra in alto */
 #home {
     height: 50px;
     font-weight: 50px;
 }
-.pokedex-image {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    cursor: pointer;
-    margin: 5px;
-    border: 2px solid transparent;
-    transition: transform 0.2s, border-color 0.2s;
-}
-    
-.pokedex-image:hover {
-    transform: scale(1.1);
-    border-color: #ffcb05; /* Colore ispirato ai Pokémon */
-}
 
-/* #pokedex-container {
-
-} */
-
+/* Contenitore dei pulsanti */
 .buttons {
-    position: absolute;
-    top: -70px; /* Posiziona i pulsanti sopra la card */
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative;
     display: flex;
-    gap: 20px; /* Spaziatura tra i pulsanti */
-    z-index: 10; /* Porta i pulsanti in primo piano */
+    z-index: 10;
 }
 
-
-.pokeball {
-    width: 50px; 
-    height: 50px;
+/* Stili per l'elemento Pokéball */
+#pokeball {
+    width: 20%;
     cursor: pointer;
-    transition: transform 0.3s;
+    transition: transform 0.3s; /* Effetto di transizione per il movimento */
+    border: none; 
+    outline: none; 
+    background-color: transparent;
 }
 
-.pokeball:hover {
-    transform: scale(1.1); /* Leggero zoom quando si passa sopra */
-}
 
-
+/* Stili per il titolo principale */
 .titolo {
     position: relative;
     top: 5px;
     width: 30%;
     height: auto;   
 }
+
+/* Stili per il pulsante che porta al Pokedex */
 .goToPokedex {
     position: absolute;
-    right: 40px;
-    margin-top: 35px;
+    right: 5%;
+    margin-top: 5%;
     width: 7%;
     height: auto;
     cursor: pointer;
 }
- 
+
+/* Pulsante per svuotare il Pokedex */
 .svuotapokedex {
     position: absolute; /* Posizionamento assoluto */
     bottom: 40px; /* Distanza dal bordo inferiore */
@@ -242,7 +219,8 @@ body {
     cursor: pointer;
 }
 
+/* Definizione di un font personalizzato */
 @font-face {
-    font-family:'custom-font';
-    src: url(font/ARCADECLASSIC.TTF);
+    font-family: 'custom-font';
+    src: url(font/ARCADECLASSIC.TTF); /* Percorso del font personalizzato */
 }
